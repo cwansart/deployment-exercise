@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:12.1.4-ce.0
+    ports: 
+      - "9080:80"
+      - "9443:433"
+    volumes:
+      - ./data/gitlab/config:/etc/gitlab
+      - ./data/gitlab/logs:/var/log/gitlab
+      - ./data/gitlab/data:/var/opt/gitlab
+
+  nexus:
+    image: sonatype/nexus3:3.18.1
+    ports:
+      - "9081:8081"
+    volumes:
+      - ./data/nexus:/nexus-data
+
+  jenkins:
+    image: jenkins/jenkins:2.60.3-alpine
+    ports:
+      - "9082:8080"
+    depends_on:
+      - gitlab
+      - nexus
+    volumes:
+      - ./data/jenkins:/var/jenkins_home
