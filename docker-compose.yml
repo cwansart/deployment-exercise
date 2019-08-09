@@ -6,6 +6,7 @@ services:
     ports: 
       - "9080:80"
       - "9443:433"
+      - "9022:22"
     volumes:
       - ./data/gitlab/config:/etc/gitlab
       - ./data/gitlab/logs:/var/log/gitlab
@@ -19,7 +20,7 @@ services:
       - ./data/nexus:/nexus-data
 
   jenkins:
-    image: jenkins/jenkins:2.60.3-alpine
+    image: jenkins/jenkins:2.189-alpine
     ports:
       - "9082:8080"
     depends_on:
