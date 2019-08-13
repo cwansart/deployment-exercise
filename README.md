@@ -61,6 +61,10 @@ To be done...
 
  * Create Docker registry to push images to
 
+## Add settings.xml to Jenkins
+
+To be done
+
 ## Add build to Jenkins
 
 Open up Jenkins again and create a new item: http://localhost:9082/view/all/newJob
