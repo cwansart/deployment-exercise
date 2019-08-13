@@ -14,10 +14,10 @@ The first run will take a few minutes. Wait until the log messages repeat.
 
 ## Configure Jenkins
 
-Find out the initial Jenkins password by running:
+Find out the initial Jenkins password by running inside the folder where `docker-compose.yml` is stored:
 
 ```
-docker exec -it $(docker ps | grep "jenkins/jenkins:2.189-alpine" | awk '{print $1}') cat /var/jenkins_home/secrets/initialAdminPassword
+cat ./data/jenkins/secrets/initialAdminPassword
 ```
 
 Copy the printed password, open the browser and login to Jenkins: http://localhost:9082/
