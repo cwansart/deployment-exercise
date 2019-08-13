@@ -40,9 +40,25 @@ Create a new project, click on _Import project_, select _Repo by URL_ and enter:
 
 ## Configure Nexus
 
+Find out the initial Nexus admin password by running in the folder where the `docker-compose` is stored:
+
+```
+cat ./data/nexus/admin.password
+```
+_Note: There is no newline at the end of file; try not to copy anything from your command line ;-)_
+
+Head over to http://localhost:9081 and login as _admin_ with the initial admin password.
+
+On the first login the wizard will be run. Change the admin password and enable anonymous access at the end of the wizard.
+
+Click on the gear icon in the upper bar, click on _Repositories_ finally click on _Create repository_ button. Select _maven2 (hosted)_, add a name like _ok-public_, select _Snapshot_ for the _Version policy_ and click on _Create repository_ at the end of the page.
+
+Your new repository URL will look like this: http://localhost:9081/repository/ok-public/ and also replace the port with the original port used by Nexus:
+To use it inside the Jenkins container we need to replace `localhost` by the container name: http://nexus:8081/repository/ok-public/
+We will use this repository to push artifacts to.
+
 To be done...
 
- * Create public maven repo to push artifacts to
  * Create Docker registry to push images to
 
 ## Add build to Jenkins
