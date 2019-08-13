@@ -38,12 +38,12 @@ Create a new project, click on _Import project_, select _Repo by URL_ and enter:
 
 *Attention:* Set the _Visibility Level_ at the bottom of the page to _Visible_.
 
+## Configure Nexus
+
 To be done...
 
- * Initial setup
- * Add user
- * Add ssh key
- * Push example project (tbd) to GitLab
+ * Create public maven repo to push artifacts to
+ * Create Docker registry to push images to
 
 ## Add build to Jenkins
 
@@ -61,13 +61,6 @@ Replace the host (here: `daafeb4f6b38`) with `gitlab`. This works because docker
 The resulting repository url should look similar to this: http://gitlab/root/deployment-example-project.git
 
 After saving the settings click on the left panel on _Build now_ and your build should work.
-
-## Configure Nexus
-
-To be done...
-
- * Create public maven repo to push artifacts to
- * Create Docker registry to push images to
 
 # Reset the containers
 
