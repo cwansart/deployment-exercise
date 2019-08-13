@@ -16,6 +16,7 @@ services:
     image: sonatype/nexus3:3.18.1
     ports:
       - "9081:8081"
+      - "9999:9999"
     volumes:
       - ./data/nexus:/nexus-data
 

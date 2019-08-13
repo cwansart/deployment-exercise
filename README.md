@@ -57,9 +57,8 @@ Your new repository URL will look like this: http://localhost:9081/repository/ok
 To use it inside the Jenkins container we need to replace `localhost` by the container name: http://nexus:8081/repository/ok-public/
 We will use this repository to push artifacts to.
 
-To be done...
+Create another repository and select _docker (hosted)_ this time. Enter a name like _ok-docker_, check the checkbox for _HTTP_ and enter the port _9999_ and create the repository.
 
- * Create Docker registry to push images to
 
 ## Add settings.xml to Jenkins
 
