@@ -28,6 +28,8 @@ After finishing you can skip the creation of a user and change the admin passwor
 To use Maven during the build we need to add it as a tool: http://localhost:9082/configureTools/
 Scroll down to _Maven_ and click on _Add Maven_. Enter the name `maven3.6.1` and select this version in the drop down menu. Then you're done and click on _Save_ on the bottom of the page.
 
+We also need to add the _Config File Provider_ plugin to Jenkins. Open http://localhost:9082/pluginManager/available, click on the _Available_ tab and search for `config file provider`. Check the checkbox and click on the _Download now and install after restart_ button. Click on the _Restart Jenkins when installation is complete and no jobs are running_ checkbox to restart Jenkins after the installation.
+
 ## Configure GitLab
 
 After installing start GitLab via: http://localhost:9080/
@@ -51,7 +53,7 @@ Head over to http://localhost:9081 and login as _admin_ with the initial admin p
 
 On the first login the wizard will be run. Change the admin password and enable anonymous access at the end of the wizard.
 
-Click on the gear icon in the upper bar, click on _Repositories_ finally click on _Create repository_ button. Select _maven2 (hosted)_, add a name like _ok-public_, select _Snapshot_ for the _Version policy_ and click on _Create repository_ at the end of the page.
+Click on the gear icon in the upper bar, click on _Repositories_ finally click on _Create repository_ button. Select _maven2 (hosted)_, use the name _ok-public_, select _Snapshot_ for the _Version policy_ and click on _Create repository_ at the end of the page.
 
 Your new repository URL will look like this: http://localhost:9081/repository/ok-public/ and also replace the port with the original port used by Nexus:
 To use it inside the Jenkins container we need to replace `localhost` by the container name: http://nexus:8081/repository/ok-public/
@@ -59,10 +61,29 @@ We will use this repository to push artifacts to.
 
 Create another repository and select _docker (hosted)_ this time. Enter a name like _ok-docker_, check the checkbox for _HTTP_ and enter the port _9999_ and create the repository.
 
+In order to push artifacts to Nexus we create a new user called `publisher`. Head over to http://localhost:9081/#admin/security/users and create a new user with the ID `publisher` and the password `publisher`. Set the status to `Active` and move `nx-admin` to the `Granted` list. This, of course, should be restricted in a production environment.
+The other data is up to you.
 
 ## Add settings.xml to Jenkins
 
-To be done
+To use the created repositories we need to add a settings.xml to Jenkins. In order to provide the `settings.xml` to the Jenkinsfile you need to open http://localhost:9082/configfiles/ and click on `Add new config file` on the left side. Select `Maven settings.xml` and enter the ID _deployment-settings_. This ID is used inside the Jenkinsfile to reference it.
+
+Enter the following as the config content:
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" 
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <servers>
+    <server>
+      <id>nexus</id>
+      <username>publisher</username>
+      <password>publisher</password>
+    </server>
+  </servers>
+</settings>
+```
 
 ## Add build to Jenkins
 
