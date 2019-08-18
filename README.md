@@ -28,6 +28,8 @@ After finishing you can skip the creation of a user and change the admin passwor
 To use Maven during the build we need to add it as a tool: http://localhost:9082/configureTools/
 Scroll down to _Maven_ and click on _Add Maven_. Enter the name `maven3.6.1` and select this version in the drop down menu. Then you're done and click on _Save_ on the bottom of the page.
 
+Another tool we'll need is Docker. To add it open up http://localhost:9082/configureTools/ again, scroll down to _Docker_ and click on _Add Docker_. Enter `docker` as the name and select the _Install automatically_ field. Click on _Add installer_ and select _Download from docker.com_. Then click _Save_.
+
 We also need to add the _Config File Provider_ plugin to Jenkins. Open http://localhost:9082/pluginManager/available, click on the _Available_ tab and search for `config file provider`. Check the checkbox and click on the _Download now and install after restart_ button. Click on the _Restart Jenkins when installation is complete and no jobs are running_ checkbox to restart Jenkins after the installation.
 
 At last we need some credentials for Nexus. You'll create a user called `publisher` with the password `publisher` in the next steps to publish Docker images to the Nexus. We'll take a step ahead and add those credentials in Jenkins now. To do that open http://localhost:9082/credentials/store/system/domain/_/newCredentials and type `publisher` into the _Username_ and the _Password_ field. In the _ID_ field enter `docker-publisher`. (Check the Jenkinsfile in the example project where it is used.)
