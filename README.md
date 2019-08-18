@@ -30,6 +30,8 @@ Scroll down to _Maven_ and click on _Add Maven_. Enter the name `maven3.6.1` and
 
 We also need to add the _Config File Provider_ plugin to Jenkins. Open http://localhost:9082/pluginManager/available, click on the _Available_ tab and search for `config file provider`. Check the checkbox and click on the _Download now and install after restart_ button. Click on the _Restart Jenkins when installation is complete and no jobs are running_ checkbox to restart Jenkins after the installation.
 
+At last we need some credentials for Nexus. You'll create a user called `publisher` with the password `publisher` in the next steps to publish Docker images to the Nexus. We'll take a step ahead and add those credentials in Jenkins now. To do that open http://localhost:9082/credentials/store/system/domain/_/newCredentials and type `publisher` into the _Username_ and the _Password_ field. In the _ID_ field enter `docker-publisher`. (Check the Jenkinsfile in the example project where it is used.)
+
 ## Configure GitLab
 
 After installing start GitLab via: http://localhost:9080/
